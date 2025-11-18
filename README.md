@@ -1,91 +1,86 @@
 # Product Listings Manager
 
-A modern React application for browsing and managing product listings with search, filter, sort, and pagination features.
-This project is built as part of the iGnosis Frontend Assignment.
+A modern React application for browsing and managing product listings with search, filter, sort, and pagination features. This project is built as part of the iGnosis Frontend Assignment.
 
-📌 Features
+## Table of Contents
 
-Product Listing Page
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Architecture Overview](#architecture-overview)
+- [Running Tests](#running-tests)
+- [Design Decisions](#design-decisions)
+- [Trade-offs & Future Improvements](#trade-offs--future-improvements)
+- [Accessibility](#accessibility)
+- [Contributing](#contributing)
 
-Paginated product grid
+## Features
 
-Search by name
+### Product Listing Page
+- Paginated product grid
+- Search by name
+- Filter by category
+- Sort by name, price, or category
 
-Filter by category
+### Product Details Page
+- Full details of a selected product
 
-Sort by name, price, or category
+### UI & UX Enhancements
+- Responsive layout (mobile-first)
+- Clean and consistent styling
+- Loading and error states
+- Accessible components (ARIA, keyboard navigation)
+- Animations for smooth interactions
 
-Product Details Page
+### Developer Features
+- API mocking using MSW
+- TypeScript support
+- Component-based architecture
 
-Full details of a selected product
+## Tech Stack
 
-UI & UX Enhancements
+- React 19 + TypeScript
+- Vite (build tooling)
+- React Router
+- Mock Service Worker (MSW) for API mocking
+- CSS (custom styles) – TailwindCSS not used
+- Vitest + React Testing Library for tests
 
-Responsive layout (mobile-first)
+## Getting Started
 
-Clean and consistent styling
+### Prerequisites
 
-Loading and error states
+- Node.js v22+
+- npm or yarn
 
-Accessible components (ARIA, keyboard navigation)
+### Installation
 
-Animations for smooth interactions
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd frontend-task
+   ```
 
-Developer Features
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-API mocking using MSW
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-TypeScript support
+4. Visit the app in your browser at [http://localhost:5173](http://localhost:5173)
 
-Component-based architecture
+## Project Structure
 
-🛠️ Tech Stack
-
-React 19 + TypeScript
-
-Vite (build tooling)
-
-React Router
-
-Mock Service Worker (MSW) for API mocking
-
-CSS (custom styles) – TailwindCSS not used
-
-Vitest + React Testing Library for tests
-
-🚀 Getting Started
-Prerequisites
-
-Node.js v22+
-
-npm or yarn
-
-Installation
-
-Clone the repository:
-
-git clone <repository-url>
-cd frontend-task
-
-
-Install dependencies:
-
-npm install
-# or
-yarn install
-
-
-Start the development server:
-
-npm run dev
-# or
-yarn dev
-
-
-Visit the app in browser:
-http://localhost:5173
-
-📂 Project Structure
+```
 src/
 ├── components/             # Reusable UI components
 │   ├── ProductCard.tsx
@@ -114,113 +109,80 @@ src/
 ├── mocks/                  # MSW mock handlers and mock data
 │
 └── App.tsx                 # Application entry
+```
 
-📘 Architecture Overview
-Component Hierarchy
+## Architecture Overview
 
-App → Routing setup
+### Component Hierarchy
+- App → Routing setup
+- ProductList → Fetches & manages list state
+- ProductDetails → Fetches selected product
+- UI Components → ProductCard, Filters, Pagination, etc.
 
-ProductList → Fetches & manages list state
+### State Management
+- Fully handled with React hooks
+- `useProducts` → List, pagination, filters, sorting
+- `useProductDetails` → Individual product data
 
-ProductDetails → Fetches selected product
-
-UI Components → ProductCard, Filters, Pagination, etc.
-
-State Management
-
-Fully handled with React hooks
-
-useProducts → List, pagination, filters, sorting
-
-useProductDetails → Individual product data
-
-API Integration (Mocked)
-
+### API Integration (Mocked)
 Handled using MSW:
+- `GET /products?page=&limit=&search=&category=&sort=`
+- `GET /products/:id`
 
-GET /products?page=&limit=&search=&category=&sort=
+## Running Tests
 
-GET /products/:id
-
-🧪 Running Tests
+```bash
 npm run test
+```
 
-🎨 Design Decisions
-Styling
+## Design Decisions
 
-Pure CSS (styles.css and reset.css)
+### Styling
+- Pure CSS (`styles.css` and `reset.css`)
+- Mobile-first responsive layout
+- Simple, clean UI for clarity
+- TailwindCSS not used (aligned with assignment repo)
 
-Mobile-first responsive layout
+### Component Architecture
+- Clear separation of container and presentational components
+- Custom hooks used to isolate business logic
+- Strong TypeScript typing for maintainability
 
-Simple, clean UI for clarity
+### Performance Enhancements
+- Server-side pagination through MSW
+- Debounced search input
+- Memoized lists and derived state
 
-TailwindCSS not used (aligned with assignment repo)
+## Trade-offs & Future Improvements
 
-Component Architecture
+### What Can Be Improved Next
+- Advanced filtering (price range, multi-category)
+- Add React Query for caching and syncing data
+- Implement global error boundaries
+- Add more animations (Framer Motion)
+- Offline mode with service workers
+- Add E2E tests (Cypress / Playwright)
+- Add multi-language support (i18n)
+- Performance monitoring tools
 
-Clear separation of container and presentational components
+### Current Limitations
+- API is mocked (no backend integration)
+- Sorting is client-side only
+- No authentication system
+- Basic test coverage (needs more integration tests)
 
-Custom hooks used to isolate business logic
-
-Strong TypeScript typing for maintainability
-
-Performance Enhancements
-
-Server-side pagination through MSW
-
-Debounced search input
-
-Memoized lists and derived state
-
-🔍 Trade-offs & Future Improvements
-What Can Be Improved Next
-
-Advanced filtering (price range, multi-category)
-
-Add React Query for caching and syncing data
-
-Implement global error boundaries
-
-Add more animations (Framer Motion)
-
-Offline mode with service workers
-
-Add E2E tests (Cypress / Playwright)
-
-Add multi-language support (i18n)
-
-Performance monitoring tools
-
-Current Limitations
-
-API is mocked (no backend integration)
-
-Sorting is client-side only
-
-No authentication system
-
-Basic test coverage (needs more integration tests)
-
-♿ Accessibility
+## Accessibility
 
 The app follows WCAG 2.1 principles:
+- Semantic HTML structure
+- ARIA labels on interactive components
+- Keyboard navigation supported
+- High-contrast UI elements
+- Visible focus states
 
-Semantic HTML structure
+## Contributing
 
-ARIA labels on interactive components
-
-Keyboard navigation supported
-
-High-contrast UI elements
-
-Visible focus states
-
-🤝 Contributing
-
-Follow existing code structure
-
-Add tests for new features
-
-Maintain accessibility standards
-
-Update documentation when needed
+- Follow existing code structure
+- Add tests for new features
+- Maintain accessibility standards
+- Update documentation when needed
